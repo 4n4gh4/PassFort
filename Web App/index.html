@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassFort: Password Strength Tester</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 PassFort: Secure Password Strength Tester</h1>
+        <form id="passwordForm">
+            <input type="password" id="password" placeholder="Enter your password" required>
+            <button type="submit">Check Password</button>
+        </form>
+        <div id="result"></div>
+    </div>
 
+    <script>
+        document.getElementById('passwordForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('/check_password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password })
+            });
+            const data = await response.json();
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <p><strong>Strength:</strong> ${data.strength}</p>
+                ${data.errors.length ? `<p>❌ Errors:<br> ${data.errors.join('<br>')}</p>` : ''}
+                <p><strong>Breach Check:</strong> ${data.breach_status}</p>
+                <p><strong>Suggested Passphrases:</strong><br> ${data.suggested_passphrases.join('<br>')}</p>
+            `;
+        });
+    </script>
+</body>
+</html>
