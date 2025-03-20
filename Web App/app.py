@@ -8,11 +8,12 @@ from markovify import Text
 app = Flask(__name__)
 
 try:
-    with open("datasets/crime_and_punishment_clean.txt", "r", encoding="utf-8") as file:
-        text = file.read()
+    response = requests.get("https://www.gutenberg.org/cache/epub/2554/pg2554.txt")
+    response.raise_for_status()
+    text = response.text
     text_model = Text(text)
 except Exception as e:
-    print(f"Error loading local file: {e}")
+    print(f"Error loading online corpus: {e}")
     text_model = None
 
 class OWASPPasswordStrengthTest:
@@ -91,13 +92,23 @@ def check_breached_password(password):
 
     # If not found in HIBP, check local rockyou.txt
     try:
-        with open("datasets/rockyou.txt", "r", encoding="latin-1") as file:
-            if password in file.read().splitlines():
-                return "❌ Found in rockyou.txt (Common Password)!"
-    except Exception as e:
-        return f"Error reading rockyou.txt: {e}"
+        # Download rockyou.txt from a reliable source
+        response = requests.get("https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Leaked-Databases/rockyou.txt.tar.gz")
+        response.raise_for_status()
 
-    return "✅ Not found in breaches."
+        # Handle compressed file
+        import tarfile
+        import io
+        tar = tarfile.open(fileobj=io.BytesIO(response.content), mode="r:gz")
+        rockyou_file = tar.extractfile("rockyou.txt")
+
+        if rockyou_file:
+            common_passwords = rockyou_file.read().decode("latin-1").splitlines()
+            if password in common_passwords:
+                return "❌ Found in rockyou.txt (Common Password)!"
+    
+    except Exception as e:
+        return f"Error fetching rockyou.txt: {e}"
 
 
 # Generate suggested passphrases
