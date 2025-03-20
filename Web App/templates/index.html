@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassFort: Password Strength Tester</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1> PassFort </h1>
+        <h2> Secure Password Strength Tester </h2>
+        <form id="passwordForm">
+            <input type="password" id="password" placeholder="Enter your password" required>
+            <button type="submit">Check Password</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('passwordForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+            const resultDiv = document.getElementById('result');
+
+            // Show a loading message while waiting for the response
+            resultDiv.innerHTML = `<p>🔍 Checking password strength...</p>`;
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/check_password', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password })
+                });
+
+                // If the response status is not OK, handle it
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                // Display results
+                resultDiv.innerHTML = `
+                    <p><strong>🔓 Real Password:</strong> ${data.real_password}</p>
+                    <p><strong>🔋 Strength:</strong> ${data.strength}</p>
+                    ${data.errors.length ? `<p style="color: red;">❌ Errors:<br> ${data.errors.join('<br>')}</p>` : '<p style="color: green;">✅ No errors detected</p>'}
+                    <p><strong>🛡️ Breach Check:</strong> ${data.breach_status}</p>
+                    <p><strong>🔑 Suggested Passphrases:</strong><br> ${data.suggested_passphrases.join('<br>')}</p>
+                `;
+            } catch (error) {
+                // Handle fetch errors or JSON parsing errors
+                resultDiv.innerHTML = `<p style="color: red;">⚠️ Error: ${error.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
