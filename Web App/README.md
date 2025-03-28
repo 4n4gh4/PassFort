@@ -23,17 +23,18 @@ Markovify, Flask and Requests Python module must be present in the system for pr
 ## Downloading the Web App files
 
 1. Clone into the **PassFort** repo using the command:
-   `git clone --depth 1 --filter=blob:none --sparse https://github.com/4n4gh4/PassFort.git`
+   ```
+   git clone --depth 1 --filter=blob:none --sparse https://github.com/4n4gh4/PassFort.git
+   ```
 
-2. Move to **PassFort** directory
-   `cd PassFort`
+2. Move to **PassFort** directory and checkout only the **Web App** folder
+   ```
+   cd PassFort
+   git sparse-checkout set "Web App"
+   ```
 
-3. Checkout only the **Web App** folder
-   `git sparse-checkout set "Web App"`
-
-4. Move to **'Web App'**
-   `cd 'Web App'`
-
-5. Run **app.py**
-   `python app.py`
-
+3. Move to **'Web App'** and run **app.py**
+   ```
+   cd 'Web App'
+   python app.py
+   ```
