@@ -1,5 +1,5 @@
 # PassFort  
-PassFort password strength tester that follows OWASP guidelines, checks for breaches, generates strong passphrases, and offers protection from keyloggers and screenloggers.  
+PassFort password strength tester that follows OWASP guidelines, checks for breaches, generates strong passphrases, and offers protection from keyloggers.  
 
 ## Key Features  
 
@@ -13,7 +13,7 @@ PassFort checks if your password has been compromised in known data breaches. It
 For users who prefer a secure yet memorable alternative to complex passwords, PassFort offers a **passphrase generator**. It takes user-provided keywords and combines them with randomized, readable text from preferred dataset to create strong, unique passphrases that are easier to remember while maintaining high entropy.  
 
 ### 🛡️ ScreenLogger and KeyLogger Protection  
-To defend against keyloggers and screenloggers, PassFort implements a special input method that allows users to **camouflage their passwords**. This method masks the real password within the entered text, preventing malicious programs from capturing the actual input.  
+To defend against keyloggers, PassFort implements a special input method that allows users to **camouflage their passwords**. This method masks the real password within the entered text, preventing malicious programs from capturing the actual input.  
 
 ### ✅ User-Friendly Interface  
 PassFort is designed to be lightweight, easy to use, and flexible. It runs smoothly as a standalone script, requiring minimal setup. Clear, concise feedback ensures that users — whether beginners or cybersecurity enthusiasts — understand their password’s strength, potential vulnerabilities, and how to improve it. 
