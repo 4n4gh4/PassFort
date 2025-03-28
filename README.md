@@ -16,7 +16,7 @@ For users who prefer a secure yet memorable alternative to complex passwords, Pa
 To defend against keyloggers, PassFort implements a special input method that allows users to **camouflage their passwords**. This method masks the real password within the entered text, preventing malicious programs from capturing the actual input.  
 
 ### ✅ User-Friendly Interface  
-PassFort is designed to be lightweight, easy to use, and flexible. It runs smoothly as a standalone script, requiring minimal setup. Clear, concise feedback ensures that users — whether beginners or cybersecurity enthusiasts — understand their password’s strength, potential vulnerabilities, and how to improve it. 
+PassFort is designed to be easy to use and flexible. It runs smoothly as a standalone script, requiring minimal setup (Colab implementation) and also as a Web Application (Python Flask Framework) on the localhost server. 
 
 ---
 
