@@ -10,7 +10,7 @@ def camouflage_input(prompt="Enter your password: "):
     print(prompt, end="", flush=True)
     full_input = getpass.getpass("").strip()
     real_password = re.sub(r"\\\*.*?\\", "", full_input)
-    print("\nYour real password is:", real_password) #REMOVE THIS LINE FOR SCREEN LOGGER PROTECTION
+    print("\nYour real password is:", real_password)
     return real_password
 
 
