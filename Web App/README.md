@@ -7,13 +7,17 @@ I tried hosting the website through github, but since it allows only only static
 Markovify, Flask and Requests Python module must be present in the system for proper execution of the Web Application. To download them on Kali Linux, follow these steps:
 
 1. Activate virtual environment
-   `python3 -m venv venv `
-   `source venv/bin/activate`
+   ```
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
 
 2. Download **Markovify** Python Module
-   `pip install markovify`
-   `pip install flask`
-   `pip install requests`
+   ```
+   pip install markovify
+   pip install flask
+   pip install requests
+   ```
 
 
 ## Downloading the Web App files
